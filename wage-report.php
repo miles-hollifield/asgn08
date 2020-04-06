@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--	Author: 
-		Date:	
+<!--	Author: Miles Hollifield
+		Date:	 4/6/2020
 		File:	wage-report.php
 		Purpose:MySQL Exercise
 -->
@@ -12,13 +12,8 @@
 </head>
 <body>
 <?php
-
-$server = "localhost";
-$user = "wbip";
-$pw = "wbip123";
-$db = "test";
-
-$connect=mysqli_connect($server, $user, $pw, $db);
+include_once('../database/connect.php');
+$connect=mysqli_connect(SERVER, USER, PW, DB);
 
 if( !$connect) 
 {
@@ -30,7 +25,7 @@ if( !$connect)
 $hourlyWage = $_POST['hourlyWage'];
 $jobTitle = $_POST['jobTitle'];
 
-$userQuery = " "; // ADD THE QUERY
+$userQuery = "SELECT empID FROM personnel WHERE hourlyWage >= '$hourlyWage' AND jobTitle = '$jobTitle'"; // ADD THE QUERY
 
 $result = mysqli_query($connect, $userQuery);
 
@@ -52,9 +47,10 @@ else
 			
 	print("<table border = \"1\">");
 	print("<tr><th>EMP ID</th></tr>");
-
-	// ADD CODE HERE
-
+  while ($row = mysqli_fetch_assoc($result))
+  {
+    print("<tr><td>".$row['empID']."</td></tr>");
+  }
 	print ("</table>");
 }
 

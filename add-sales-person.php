@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--	Author: 
-		Date:	
+<!--	Author: Miles Hollifield
+		Date:	4/6/2020
 		File:	add-sale-person.php
 		Purpose:MySQL Exercise
 -->
@@ -14,13 +14,8 @@
 <body>
 
 <?php
-
-$server = "localhost";
-$user = "wbip";
-$pw = "wbip123";
-$db = "test";
-
-$connect=mysqli_connect($server, $user, $pw, $db);
+include_once('../database/connect.php');
+$connect=mysqli_connect(SERVER, USER, PW, DB);
 
 if( !$connect) 
 {
@@ -32,7 +27,7 @@ $empID = $_POST['empID'];
 $firstName = $_POST['firstName'];
 $lastName = $_POST['lastName'];
 
-$userQuery = ""; // ADD THE QUERY
+$userQuery = "INSERT INTO personnel VALUES ('$empID', '$firstName', '$lastName', 'sales', '8.25')"; // ADD THE QUERY
 
 $result = mysqli_query($connect, $userQuery);
 

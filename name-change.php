@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--	Author: 
-		Date:	
+<!--	Author: Miles Hollifield
+		Date:	4/6/2020
 		File:	name-change.php
 		Purpose:MySQL Exercise
 -->
@@ -13,13 +13,8 @@
 
 <body>
 <?php
-
-$server = "localhost";
-$user = "wbip";
-$pw = "wbip123";
-$db = "test";
-
-$connect=mysqli_connect($server, $user, $pw, $db);
+include_once('../database/connect.php');
+$connect=mysqli_connect(SERVER, USER, PW, DB);
 
 if( !$connect) 
 {
@@ -28,7 +23,7 @@ if( !$connect)
 	", ".mysqli_connect_error().")");
 }
 
-$userQuery = ""; // ADD QUERY
+$userQuery = "UPDATE personnel SET lastName = 'Jackson', jobTitle = 'Manager' WHERE empID = '12353'"; // ADD QUERY
 
 $result = mysqli_query($connect, $userQuery);
 
