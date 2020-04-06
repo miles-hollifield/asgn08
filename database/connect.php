@@ -1,6 +1,6 @@
 <?php
 
-$server = "localhost";
-$user = "wbip";
-$pw = "wbip123";
-$db = "test";
+define('SERVER' = 'localhost');
+define('USER' = 'wbip');
+define('PW' = 'wbip123');
+define('DB' = 'test');
