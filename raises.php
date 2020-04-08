@@ -13,13 +13,13 @@
 
 <body>
 <?php
-include_once('../database/connect.php');
+include_once('database/connect.php');
 $connect=mysqli_connect(SERVER, USER, PW, DB);
 
 if( !$connect) 
 {
-	die("ERROR: Cannot connect to database $db on server $server 
-	using user name $user (".mysqli_connect_errno().
+	die("ERROR: Cannot connect to database ".DB." on server ".SERVER." 
+	using user name ".USER." (".mysqli_connect_errno().
 	", ".mysqli_connect_error().")");
 }
 $userQuery = "SELECT empID FROM personnel WHERE hourlyWage < 10"; // ADD THE QUERY
@@ -28,7 +28,7 @@ $result = mysqli_query($connect, $userQuery);
 
 if (!$result) 
 {
-	die("Could not successfully run query ($userQuery) from $db: " .	
+	die("Could not successfully run query ($userQuery) from ".DB.": " .	
 		mysqli_error($connect) );
 }
 

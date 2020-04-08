@@ -12,7 +12,7 @@
 </head>
 <body>
 <?php
-include_once('../database/connect.php');
+include_once('database/connect.php');
 $connect=mysqli_connect(SERVER, USER, PW, DB);
 
 if( !$connect) 
