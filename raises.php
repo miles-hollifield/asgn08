@@ -1,53 +1,29 @@
-<!DOCTYPE html>
-<!--	Author: Miles Hollifield
-		Date:	4/6/2020
-		File:	raises.php
-		Purpose:MySQL Exercise
--->
-
-<html>
-<head>
-	<title>MySQL Query</title>
-	<link rel ="stylesheet" type="text/css" href="sample.css">
-</head>
-
-<body>
 <?php
-include_once('database/connect.php');
-$connect=mysqli_connect(SERVER, USER, PW, DB);
+$page_title = 'Raises';
+include_once("initialize.php");
 
-if( !$connect) 
-{
-	die("ERROR: Cannot connect to database ".DB." on server ".SERVER." 
-	using user name ".USER." (".mysqli_connect_errno().
-	", ".mysqli_connect_error().")");
-}
-$userQuery = "SELECT empID FROM personnel WHERE hourlyWage < 10"; // ADD THE QUERY
+check_db_connection($connect);
+
+$userQuery = hourly_wage_less_than_ten_dollars_query();
 
 $result = mysqli_query($connect, $userQuery);
 
-if (!$result) 
-{
-	die("Could not successfully run query ($userQuery) from ".DB.": " .	
-		mysqli_error($connect) );
-}
+check_that_query_runs($result);
 
-if (mysqli_num_rows($result) == 0) 
-{
+if (mysqli_num_rows($result) == 0) {
 	print("No records found with query $userQuery");
 }
-else 
-{ 
-	print("<h1>LIST OF EMPLOYEES WHO NEED A RAISE</h1>");
-  while ($row = mysqli_fetch_assoc($result))
-  {
-    print("<p>Employee ".$row['empID']." needs a raise!");
-  }
-}
+else { 
   
-mysqli_close($connect);   // close the connection
- 
+	echo "<h1>List of Employees Who Need a Raise</h1>";
+	echo "<table border=\"1\" width=\"2em\">";
+	echo "<tr><th>EmpID</th><th>First</th><th>Last</th></tr>";
+  
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo ("<tr><td>" . $row['empID'] . "</td><td>" . $row['firstName'] . "</td><td>" . $row['lastName'] . "</td></tr>");
+  }
+  echo "</table>";
+}
+  mysqli_close($connect); 
+	include_once("includes/footer.php");
 ?>
-
-</body>
-</html>
